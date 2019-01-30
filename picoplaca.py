@@ -3,7 +3,7 @@ from datetime import datetime
 
 class PicoPlaca(object):
 
-    def __init__(self, placa="ABC-0123", fecha="2019-01-28",hora="09:02"):
+    def __init__(self, placa = "ABC-0123", fecha = datetime.now().strftime("%Y-%m-%d"), hora = datetime.now().strftime("%H:%M")):
         self.placa = placa.upper()
         self.fecha = fecha
         self.hora = hora
@@ -29,11 +29,11 @@ class PicoPlaca(object):
             exit(1)
 
     def valida_hora(self):
-        hora=datetime.strptime(self.hora,'%H:%M').time()
-        manana_inicio = datetime.strptime("07:00","%H:%M").time()
-        manana_fin = datetime.strptime("09:30","%H:%M").time()
-        tarde_inicio = datetime.strptime("16:00","%H:%M").time()
-        tarde_fin = datetime.strptime("19:30","%H:%M").time()
+        hora = datetime.strptime(self.hora, '%H:%M').time()
+        manana_inicio = datetime.strptime("07:00", "%H:%M").time()
+        manana_fin = datetime.strptime("09:30", "%H:%M").time()
+        tarde_inicio = datetime.strptime("16:00", "%H:%M").time()
+        tarde_fin = datetime.strptime("19:30", "%H:%M").time()
 
         if (hora >= manana_inicio and hora <= manana_fin) or \
         (hora >= tarde_inicio and hora <= tarde_fin):
@@ -42,7 +42,7 @@ class PicoPlaca(object):
             return False
 
     def valida_fecha(self):
-        fecha = datetime.strptime(self.fecha,"%Y-%m-%d").weekday()
+        fecha = datetime.strptime(self.fecha, "%Y-%m-%d").weekday()
         if fecha < 5:
             return True
         else:
@@ -50,7 +50,7 @@ class PicoPlaca(object):
 
     def valida_placa(self):
         digito_placa = int(self.placa[-1])
-        fecha = datetime.strptime(self.fecha,"%Y-%m-%d").weekday()
+        fecha = datetime.strptime(self.fecha, "%Y-%m-%d").weekday()
         if fecha == 0 and (digito_placa == 1 or digito_placa ==2):
             return True
         elif fecha == 1 and (digito_placa == 3 or digito_placa == 4):
@@ -72,9 +72,9 @@ class PicoPlaca(object):
             print("Si puede circular")
             return False
 
-
-placa = "tbf-2593"
+placa= "abc-1234"
 fecha = "2019-02-26"
-hora = "19:30" 
-Placa = PicoPlaca(placa,fecha,hora)
+hora = "19:30"
+Placa = PicoPlaca(placa, fecha, hora)
+#Placa = PicoPlaca()
 Placa.prediccion()
